@@ -53,12 +53,7 @@ $('body').keypress(function () {
         $('#target-letter').text(sentences[sindex][sletter]);
         return;
     };
-
-    // if (sindex === sentences.length) {
-    //     $('body').show(wordCount / minutes - 2 * mistakes);
-    //     console.log(wordCount);
-    //     return;
-    // };
+    
 
     // Main Game Logic
     if (event.which === sentences[sindex].charCodeAt(sletter)) {
