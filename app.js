@@ -38,13 +38,17 @@ $('body').keypress(function () {
         // End of game logic
         let endTime = Date.now();
         let minutes = ((endTime - startTime) / 1000 / 60);
+        let score = Math.abs(wordCount / minutes - 2 * mistakes);
 
         if (sindex >= sentences.length) {
             $('body').unbind('keypress');
             $('#sentence').text('it ends here!');
-            // let endTime = Date.now();
-            // let minutes = ((endTime - startTime) / 1000 / 60);
-            console.log(minutes);
+            $('#target-letter').text('You scored ' + score.toFixed(2));
+            let button = $('<button class="btn btn-primary">Replay?</button>')
+            $('#feedback').append(button);
+            button.click(function () {
+                window.location.reload();
+            });
             return;
         };
 
@@ -53,7 +57,7 @@ $('body').keypress(function () {
         $('#target-letter').text(sentences[sindex][sletter]);
         return;
     };
-    
+
 
     // Main Game Logic
     if (event.which === sentences[sindex].charCodeAt(sletter)) {
@@ -61,7 +65,7 @@ $('body').keypress(function () {
     } else {
         $('#feedback').append('<span class="glyphicon glyphicon-remove"></span>');
         mistakes++;
-        // console.log(mistakes);
+
     };
     sletter++;
     let nextLetter = sentences[sindex][sletter];
